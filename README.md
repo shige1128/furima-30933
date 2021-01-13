@@ -37,3 +37,4 @@
 | address_number | integer | null_false |
 | building       | string  |            |
 | phone_number   | integer | null_false |
+
