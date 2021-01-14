@@ -10,7 +10,7 @@
 | first_name_kana       | string  | null_false |
 | email                 | string  | null_false |  
 | encrypted_password    | string  | null_false |
-| birthday_id           | integer | null_false |
+| birthday_id           | date    | null_false |
 
 ## Association
   has_many :products
@@ -37,7 +37,7 @@
 | Colum                 | Type    | Option           |
 | --------------------- | ------- | ---------------- |
 | postal_code           | string  | null_false       |
-| address_id            | integer | null_false       |
+| area_id               | integer | null_false       |
 | municipalities        | string  | null_false       |
 | address_number        | string  | null_false       | 
 | building              | string  |                  |
@@ -45,8 +45,7 @@
 | purchase_histories_id | integer | foreign_key: true|
 
 ## Association
-  has_one :user
-  belongs_to :product
+  belongs_to :purchase_history
 
 # Purchase_histories
 | Colum      | Type    | Option     |
@@ -54,7 +53,7 @@
 | user_id    | integer | null_false |
 | product_id | integer | null_false |
 
-# Association
+## Association
   belongs_to :user
   belongs_to :product
   has_one :address
