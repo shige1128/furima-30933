@@ -10,7 +10,7 @@
 | first_name_kana       | string  | null_false |
 | email                 | string  | null_false |  
 | encrypted_password    | string  | null_false |
-| birthday_id           | date    | null_false |
+| birthday              | date    | null_false |
 
 ## Association
   has_many :products
@@ -31,7 +31,7 @@
 
 ## Association
   belongs_to :user
-  has_one :purchase_histories
+  has_one :purchase_history
 
 # Addresses
 | Colum                 | Type    | Option           |
