@@ -91,6 +91,11 @@ RSpec.describe User, type: :model do
         another_user.valid?
         expect(another_user.errors.full_messages).to include('Email has already been taken')
       end
+      it 'emailは@を含まないと登録できない' do
+        @user.email = @user.email.delete("@")
+        @user.valid?
+        expect(@user.errors.full_messages).to include('Email is invalid')
+      end
       it 'family_nameは全角文字でないと登録できない' do
         @user.family_name = 'zenkaku'
         @user.valid?
