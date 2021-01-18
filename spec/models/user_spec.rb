@@ -27,8 +27,8 @@ RSpec.describe User, type: :model do
         expect(@user).to be_valid
       end
       it 'passwordとpassword_confirmationが6文字以上であれば登録できる' do
-        @user.password = '000000'
-        @user.password_confirmation = '000000'
+        @user.password = 'a00000'
+        @user.password_confirmation = 'a00000'
         expect(@user).to be_valid
       end
     end
@@ -83,6 +83,24 @@ RSpec.describe User, type: :model do
         @user.password_confirmation = ''
         @user.valid?
         expect(@user.errors.full_messages).to include("Password confirmation doesn't match Password")
+      end
+      it 'passwordは半角英語のみでは登録できない' do
+        @user.password = "abcdef"
+        @user.password_confirmation = "abcDEF"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+      it 'passwordは半角数字のみでは登録できない' do
+        @user.password = "123456"
+        @user.password_confirmation = "123456"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
+      end
+      it 'passwordは全角英数混合では登録できない' do
+        @user.password = "ＡＢＣＤＥＦ１"
+        @user.password_confirmation = "ＡＢＣＤＥＦ１"
+        @user.valid?
+        expect(@user.errors.full_messages).to include("Password is invalid")
       end
       it '重複したemailがあると登録できない' do
         @user.save
