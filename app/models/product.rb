@@ -1,11 +1,20 @@
 class Product < ApplicationRecord
-  belongs_to :user
+  extend ActiveHash::Associations::ActiveRecordExtensions
+  belongs_to :category
+  belongs_to :status
+  belongs_to :shipping
+  belongs_to :area
+  belongs_to :day
 
-  validates :image, :products_name, :text, :category_id, :status_id, :shipping_id, :area_id, :days_id, :price_id, presence: true
+  belongs_to :user
+  has_one_attached :image
+
+  validates :image, :products_name, :text, :category_id, :status_id, :shipping_id, :area_id, :days_id, :price, presence: true
   validates :products_name, length: { maximum: 40 }
   validates :text, length: { maximum: 1000 }
   validates :price, inclusion: { in: 300..9999999 }
+  validates :category_id, :status_id, :area_id, :shipping_id, :days_id, numericality: { other_than: 1 }
   with_options presence: true do
-    validates :price, format: { /\A[0-9]+\z/}
+    validates :price, format: { with: /\A[0-9]+\z/ }
   end
 end
