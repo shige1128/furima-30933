@@ -1,17 +1,24 @@
 class ProductsController < ApplicationController
   def index
+    @products = Product.order("created_at DESC")
   end
-  
+
   def new
     @product = Product.new
   end
 
   def create
+    @product = Product.new(product_params)
+    if @product.save
+      redirect_to root_path
+    else
+      render :new
+    end
   end
 
   private
 
   def product_params
-    params.require(:message).permit(:content, :image).merge(user_id: current_user.id)
+    params.require(:product).permit(:image, :products_name, :text, :category_id, :status_id, :shipping_id, :area_id, :days_id, :price).merge(user_id: current_user.id)
   end
 end
