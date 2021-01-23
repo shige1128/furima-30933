@@ -10,42 +10,6 @@ RSpec.describe Product, type: :model do
       it 'image, products_name, text, category_id, status_id, shipping_id, area_id, days_id, priceが存在すれば出品できる' do
         expect(@product).to be_valid
       end
-      it 'products_nameが1〜40文字なら出品できる' do
-        @product.products_name = "1"
-        expect(@product).to be_valid
-      end
-      it 'textが1〜1000文字なら出品できる' do
-        @product.text = "1"
-        expect(@product).to be_valid
-      end
-      it 'category_idが1でなければ出品できる' do
-        @product.category_id = rand(2..17)
-        expect(@product).to be_valid
-      end
-      it 'status_idが1でなければ出品できる' do
-        @product.status_id = rand(2..9)
-        expect(@product).to be_valid
-      end
-      it 'shipping_idが1でなければ出品できる' do
-        @product.shipping_id = rand(2..3)
-        expect(@product).to be_valid
-      end
-      it 'area_idが1でなければ出品できる' do
-        @product.area_id = rand(2..48)
-        expect(@product).to be_valid
-      end
-      it 'days_idが1でなければ出品できる' do
-        @product.days_id = rand(2..4) 
-        expect(@product).to be_valid
-      end
-      it 'priceが半角数字なら保存できる' do
-        @product.price = 3000
-        expect(@product).to be_valid
-      end
-      it 'priceの数値が300〜9999999なら出品できる' do
-        @product.price = rand(300..9999999)
-        expect(@product).to be_valid
-      end
     end
 
     context '出品できない時' do
@@ -64,35 +28,50 @@ RSpec.describe Product, type: :model do
         @product.valid?
         expect(@product.errors.full_messages).to include("Text can't be blank")
       end
-      it 'category_idが空だと出品できない' do
-        @product.category_id = ""
+      it 'category_idが1だと出品できない' do
+        @product.category_id = "1"
         @product.valid?
-        expect(@product.errors.full_messages).to include("Category can't be blank")
+        expect(@product.errors.full_messages).to include("Category is not a number")
       end
-      it 'status_idが空だと出品できない' do
-        @product.status_id = ""
+      it 'status_idが1だと出品できない' do
+        @product.status_id = "1"
         @product.valid?
-        expect(@product.errors.full_messages).to include("Status can't be blank")
+        expect(@product.errors.full_messages).to include("Status is not a number")
       end
-      it 'shipping_idが空だと出品できない' do
-        @product.shipping_id = ""
+      it 'shipping_idが1だと出品できない' do
+        @product.shipping_id = "1"
         @product.valid?
-        expect(@product.errors.full_messages).to include("Shipping can't be blank")
+        expect(@product.errors.full_messages).to include("Shipping is not a number")
       end
-      it 'area_idが空だと出品できない' do
-        @product.area_id = ""
+      it 'area_idが1だと出品できない' do
+        @product.area_id = "1"
         @product.valid?
-        expect(@product.errors.full_messages).to include("Area can't be blank")
+        expect(@product.errors.full_messages).to include("Area is not a number")
       end
-      it 'days_idが空だと出品できない' do
-        @product.days_id = ""
+      it 'days_idが1だと出品できない' do
+        @product.days_id = "1"
         @product.valid?
-        expect(@product.errors.full_messages).to include("Days can't be blank")
+        expect(@product.errors.full_messages).to include("Days is not a number")
       end
       it 'priceが空だと出品できない' do
         @product.price = ""
         @product.valid?
         expect(@product.errors.full_messages).to include("Price can't be blank")
+      end
+      it 'priceが半角数字でないと出品できない' do
+        @product.price = "eigo"
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price is not included in the list")
+      end
+      it 'priceは299円以下では出品できない' do
+        @product.price = 1
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price is not included in the list")
+      end
+      it 'priceは10,000,000以上では出品できない' do
+        @product.price = 10000000
+        @product.valid?
+        expect(@product.errors.full_messages).to include("Price is not included in the list")
       end
     end
   end
