@@ -29,29 +29,29 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("Text can't be blank")
       end
       it 'category_idが1だと出品できない' do
-        @product.category_id = "1"
+        @product.category_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Category is not a number")
+        expect(@product.errors.full_messages).to include("Category must be other than 1")
       end
       it 'status_idが1だと出品できない' do
-        @product.status_id = "1"
+        @product.status_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Status is not a number")
+        expect(@product.errors.full_messages).to include("Status must be other than 1")
       end
       it 'shipping_idが1だと出品できない' do
-        @product.shipping_id = "1"
+        @product.shipping_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Shipping is not a number")
+        expect(@product.errors.full_messages).to include("Shipping must be other than 1")
       end
       it 'area_idが1だと出品できない' do
-        @product.area_id = "1"
+        @product.area_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Area is not a number")
+        expect(@product.errors.full_messages).to include("Area must be other than 1")
       end
       it 'days_idが1だと出品できない' do
-        @product.days_id = "1"
+        @product.days_id = 1
         @product.valid?
-        expect(@product.errors.full_messages).to include("Days is not a number")
+        expect(@product.errors.full_messages).to include("Days must be other than 1")
       end
       it 'priceが空だと出品できない' do
         @product.price = ""
@@ -64,7 +64,7 @@ RSpec.describe Product, type: :model do
         expect(@product.errors.full_messages).to include("Price is not included in the list")
       end
       it 'priceは299円以下では出品できない' do
-        @product.price = 1
+        @product.price = 299
         @product.valid?
         expect(@product.errors.full_messages).to include("Price is not included in the list")
       end
