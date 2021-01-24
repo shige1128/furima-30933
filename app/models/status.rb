@@ -1,5 +1,4 @@
 class Status < ActiveHash::Base
-
   self.data = [
     { id: 1, name: '---' },
     { id: 2, name: '新品、未使用' },
@@ -9,9 +8,9 @@ class Status < ActiveHash::Base
     { id: 6, name: '傷や汚れが目立つ' },
     { id: 7, name: '全体的に状態が悪い' },
     { id: 8, name: 'ジャンク品' },
-    { id: 9, name: 'ボロッボロ' },
+    { id: 9, name: 'ボロッボロ' }
   ]
-  
+
   include ActiveHash::Associations
   has_many :products
 end
