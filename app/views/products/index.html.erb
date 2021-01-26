@@ -126,8 +126,8 @@
     <%= link_to '新規投稿商品', new_product_path, class: "subtitle" %>
     <ul class='item-lists'>
 
-      <li class='list'>
-        <% @products.each do |product| %>
+      <% @products.each do |product| %>
+        <li class='list'>
           <%= link_to product_path(product.id) do%>
             <div class='item-img-content'>
               <%= image_tag product.image, class: "item-img" %>
@@ -152,8 +152,8 @@
               </div>
             </div>
           <% end %>
-        <% end %>
-      </li>
+        </li>
+      <% end %>
       <% if @products.empty? %>
         <li class='list'>
           <%= link_to '#' do %>
