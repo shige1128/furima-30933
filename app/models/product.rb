@@ -13,7 +13,7 @@ class Product < ApplicationRecord
   validates :products_name, length: { maximum: 40 }
   validates :text, length: { maximum: 1000 }
   validates :price, inclusion: { in: 300..9_999_999 }
-  validates :category_id, :status_id, :area_id, :shipping_id, :days_id, numericality: { other_than: 1 }
+  validates :category_id, :status_id, :area_id, :shipping_id, :day_id, numericality: { other_than: 1 }
   with_options presence: true do
     validates :price, format: { with: /\A[0-9]+\z/ }
   end
