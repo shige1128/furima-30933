@@ -36,7 +36,8 @@ class ProductsController < ApplicationController
   end
 
   def update
-    if @product.update(product_params)
+    if current_user.id == @product.user_id
+      @product.update(product_params)
       redirect_to action: :show
     else
       render :edit
