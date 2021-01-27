@@ -24,7 +24,7 @@ class ProductsController < ApplicationController
 
   def destroy
     if current_user.id == @product.user.id
-      product.destroy
+      @product.destroy
       redirect_to root_path
     else
       redirect_to root_path
