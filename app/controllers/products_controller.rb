@@ -32,13 +32,10 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    unless current_user.id == @product.user.id
-      redirect_to root_path
-    end
+    redirect_to root_path unless current_user.id == @product.user.id
   end
 
   def update
-    @product.update(product_params)
     if @product.update(product_params)
       redirect_to action: :show
     else
