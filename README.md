@@ -14,7 +14,7 @@
 
 ## Association
   has_many :products
-  has_many :purchase_histories
+  has_many :orders
 
 # Products
 | Colum         | Type    | Option            |
@@ -31,7 +31,7 @@
 
 ## Association
   belongs_to :user
-  has_one :purchase_history
+  has_one :order
 
 # Addresses
 | Colum                 | Type    | Option           |
@@ -42,12 +42,12 @@
 | address_number        | string  | null_false       | 
 | building              | string  |                  |
 | phone_number          | string  | null_false       |
-| purchase_histories_id | integer | foreign_key: true|
+| order_id              | integer | foreign_key: true|
 
 ## Association
-  belongs_to :purchase_history
+  belongs_to :order
 
-# Purchase_histories
+# Orders
 | Colum      | Type    | Option     |
 | ---------- | ------- | ---------- |
 | user_id    | integer | null_false |
