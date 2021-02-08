@@ -48,10 +48,10 @@
   belongs_to :order
 
 # Orders
-| Colum      | Type    | Option     |
-| ---------- | ------- | ---------- |
-| user_id    | integer | null_false |
-| product_id | integer | null_false |
+| Colum      | Type    | Option           |
+| ---------- | ------- | ---------------- |
+| user_id    | integer | foreign_key: true|
+| product_id | integer | foreign_key: true|
 
 ## Association
   belongs_to :user
