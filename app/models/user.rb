@@ -3,6 +3,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :validatable
 
   has_many :products
+  has_many :orders
   has_one_attached :image
 
   validates :nickname, :family_name, :first_name, :family_name_kana, :first_name_kana, :birthday, presence: true

@@ -5,6 +5,7 @@ class Product < ApplicationRecord
   belongs_to :shipping
   belongs_to :area
   belongs_to :day
+  has_one    :order
 
   belongs_to :user
   has_one_attached :image
