@@ -34,15 +34,15 @@
   has_one :order
 
 # Addresses
-| Colum                 | Type    | Option           |
-| --------------------- | ------- | ---------------- |
-| postal_code           | string  | null_false       |
-| area_id               | integer | null_false       |
-| municipalities        | string  | null_false       |
-| address_number        | string  | null_false       | 
-| building              | string  |                  |
-| phone_number          | string  | null_false       |
-| order_id              | integer | foreign_key: true|
+| Colum                 | Type      | Option            |
+| --------------------- | --------- | ----------------- |
+| postal_code           | string    | null_false        |
+| area_id               | integer   | null_false        |
+| municipalities        | string    | null_false        |
+| address_number        | string    | null_false        | 
+| building              | string    |                   |
+| phone_number          | string    | null_false        |
+| order                 | reference | foreign_key: true |
 
 ## Association
   belongs_to :order
