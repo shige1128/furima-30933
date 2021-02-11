@@ -1,7 +1,9 @@
 class OrdersController < ApplicationController
+  before_action :authenticate_user!, only: [:index, :create]
   before_action :set_product, only: [:index, :create]
 
   def index
+    redirect_to root_path unless @product.order.blank? && current_user.id != @product.user_id
     @order_history = OrderHistory.new
   end
 
@@ -34,5 +36,4 @@ class OrdersController < ApplicationController
       currency: 'jpy'
     )
   end
-
 end
