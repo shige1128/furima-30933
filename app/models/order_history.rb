@@ -4,7 +4,7 @@ class OrderHistory
   attr_accessor :postal_code, :area, :municipalities, :address_number, :building, :phone_number, :user_id, :product_id, :token
 
   validates :municipalities, :address_number, :token, presence: true
-  validates :area, numericality: { other_than: 0, message: "can't be blank" }
+  validates :area, numericality: { other_than: 1, message: "can't be blank" }
   with_options presence: true do
     validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: "is invalid. Include hyphen(-)" }
     validates :phone_number, format: { with: /\A\d{1,11}\z/, message: "is invalid. Exclude hyphen(-)"}
