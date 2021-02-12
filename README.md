@@ -14,7 +14,7 @@
 
 ## Association
   has_many :products
-  has_many :purchase_histories
+  has_many :orders
 
 # Products
 | Colum         | Type    | Option            |
@@ -31,27 +31,27 @@
 
 ## Association
   belongs_to :user
-  has_one :purchase_history
+  has_one :order
 
 # Addresses
-| Colum                 | Type    | Option           |
-| --------------------- | ------- | ---------------- |
-| postal_code           | string  | null_false       |
-| area_id               | integer | null_false       |
-| municipalities        | string  | null_false       |
-| address_number        | string  | null_false       | 
-| building              | string  |                  |
-| phone_number          | string  | null_false       |
-| purchase_histories_id | integer | foreign_key: true|
+| Colum                 | Type      | Option            |
+| --------------------- | --------- | ----------------- |
+| postal_code           | string    | null_false        |
+| area_id               | integer   | null_false        |
+| municipalities        | string    | null_false        |
+| address_number        | string    | null_false        | 
+| building              | string    |                   |
+| phone_number          | string    | null_false        |
+| order                 | reference | foreign_key: true |
 
 ## Association
-  belongs_to :purchase_history
+  belongs_to :order
 
-# Purchase_histories
-| Colum      | Type    | Option     |
-| ---------- | ------- | ---------- |
-| user_id    | integer | null_false |
-| product_id | integer | null_false |
+# Orders
+| Colum      | Type    | Option           |
+| ---------- | ------- | ---------------- |
+| user_id    | integer | foreign_key: true|
+| product_id | integer | foreign_key: true|
 
 ## Association
   belongs_to :user
