@@ -70,6 +70,16 @@ RSpec.describe OrderHistory, type: :model do
         @order_history.valid?
         expect(@order_history.errors.full_messages).to include('Phone number is invalid. Exclude hyphen(-)')
       end
+      it 'user_idが空では登録できない' do
+        @order_history.user_id = ''
+        @order_history.valid?
+        expect(@order_history.errors.full_messages).to include("User can't be blank")
+      end
+      it 'product_idが空では登録できない' do
+        @order_history.product_id = ''
+        @order_history.valid?
+        expect(@order_history.errors.full_messages).to include("Product can't be blank")
+      end
     end
   end
 end
