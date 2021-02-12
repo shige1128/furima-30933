@@ -1,6 +1,7 @@
 class ProductsController < ApplicationController
   before_action :authenticate_user!, only: [:new, :destroy, :edit, :update]
   before_action :set_product, only: [:show, :destroy, :edit, :update]
+  before_action :order_check, only: [:edit, :update]
 
   def index
     @products = Product.order('created_at DESC')
@@ -32,7 +33,6 @@ class ProductsController < ApplicationController
   end
 
   def edit
-    redirect_to root_path unless current_user.id == @product.user.id
   end
 
   def update
@@ -54,4 +54,9 @@ class ProductsController < ApplicationController
     params.require(:product).permit(:image, :products_name, :text, :category_id, :status_id, :shipping_id, :area_id, :day_id,
                                     :price).merge(user_id: current_user.id)
   end
+
+  def order_check
+    redirect_to root_path unless @product.order.blank? && current_user.id == @product.user_id
+  end
+
 end
