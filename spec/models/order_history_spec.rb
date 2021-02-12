@@ -2,7 +2,10 @@ require 'rails_helper'
 
 RSpec.describe OrderHistory, type: :model do
   before do
-    @order_history = FactoryBot.build(:order_history)
+    user = FactoryBot.create(:user)
+    product = FactoryBot.create(:product)
+    @order_history = FactoryBot.build(:order_history, user_id: user.id, product_id: product.id)
+    sleep 0.1
   end
 
   describe '商品購入機能' do
@@ -20,6 +23,10 @@ RSpec.describe OrderHistory, type: :model do
       end
       it 'phone_nomberが11桁までの半角数字なら購入できる' do
         @order_history.phone_number = rand(0..99_999_999_999)
+        expect(@order_history).to be_valid
+      end
+      it 'buildingは無い場合でも購入できる' do
+        @order_history.building = ''
         expect(@order_history).to be_valid
       end
     end
@@ -69,6 +76,11 @@ RSpec.describe OrderHistory, type: :model do
         @order_history.phone_number = 'a000-0000'
         @order_history.valid?
         expect(@order_history.errors.full_messages).to include('Phone number is invalid. Exclude hyphen(-)')
+      end
+      it 'phone_numberが12桁以上では購入できない' do
+        @order_history.phone_number = '000000000000'
+        @order_history.valid?
+        expect(@order_history.errors.full_messages).to include("Phone number is invalid. Exclude hyphen(-)")
       end
       it 'user_idが空では登録できない' do
         @order_history.user_id = ''

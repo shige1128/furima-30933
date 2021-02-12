@@ -39,7 +39,7 @@ class OrdersController < ApplicationController
     )
   end
 
-  def ordr_check
+  def order_check
     redirect_to root_path unless @product.order.blank? && current_user.id != @product.user_id
   end
 end
